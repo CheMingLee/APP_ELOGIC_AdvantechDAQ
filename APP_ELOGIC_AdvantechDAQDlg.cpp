@@ -13,12 +13,12 @@
 // CAPP_ELOGIC_AdvantechDAQDlg dialog
 CAPP_ELOGIC_AdvantechDAQDlg::CAPP_ELOGIC_AdvantechDAQDlg(CWnd* pParent /*=NULL*/)
 	: CDialog(CAPP_ELOGIC_AdvantechDAQDlg::IDD, pParent)
-	, m_iAiDevNum(0)
-	, m_iDioDevNum(0)
-	, m_iAiChanel(0)
-	, m_iDiPin(0)
-	, m_iDoPin(0)
-	, m_iDoData(0)
+	, m_iAiDevNum(3)
+	, m_iDioDevNum(4)
+	, m_iAiChanel(1)
+	, m_iDiPin(1)
+	, m_iDoPin(1)
+	, m_iDoData(1)
 {
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
 }
@@ -26,6 +26,12 @@ CAPP_ELOGIC_AdvantechDAQDlg::CAPP_ELOGIC_AdvantechDAQDlg(CWnd* pParent /*=NULL*/
 void CAPP_ELOGIC_AdvantechDAQDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialog::DoDataExchange(pDX);
+	DDX_Text(pDX, IDC_EDIT_AI_DEVNUM, m_iAiDevNum);
+	DDX_Text(pDX, IDC_EDIT_DIO_DEVNUM, m_iDioDevNum);
+	DDX_Text(pDX, IDC_EDIT_AI_CH, m_iAiChanel);
+	DDX_Text(pDX, IDC_EDIT_DI_PIN, m_iDiPin);
+	DDX_Text(pDX, IDC_EDIT_DO_PIN, m_iDoPin);
+	DDX_Text(pDX, IDC_EDIT_DO_DATA, m_iDoData);
 }
 
 BEGIN_MESSAGE_MAP(CAPP_ELOGIC_AdvantechDAQDlg, CDialog)
@@ -117,7 +123,7 @@ void CAPP_ELOGIC_AdvantechDAQDlg::OnBnClickedButtonReadAi()
 	if(!UpdateData(TRUE))
 		return;
 
-	double dScaledData;
+	double dScaledData = 0;
 	CString strData;
 	
 	dScaledData	= m_Read_AI(m_iAiChanel);
@@ -130,7 +136,7 @@ void CAPP_ELOGIC_AdvantechDAQDlg::OnBnClickedButtonReadDi()
 	if(!UpdateData(TRUE))
 		return;
 
-	int iDiData;
+	int iDiData = 0;
 	CString strData;
 
 	iDiData = m_Read_DI(m_iDiPin);
